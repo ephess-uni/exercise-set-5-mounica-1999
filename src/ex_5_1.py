@@ -17,4 +17,10 @@ if __name__ == "__main__":
     # Tests will run your command using a system call.
     # To test your program with arguments, run it from the command line
     # (see README.md for more details)
-    pass
+    parser = argparse.ArgumentParser(description='This program prints the number of lines in infile.')
+    parser.add_argument('infile', help='Input file path')
+
+    args = parser.parse_args()
+    infile = args.infile
+
+    ex_5_0.line_count(infile)

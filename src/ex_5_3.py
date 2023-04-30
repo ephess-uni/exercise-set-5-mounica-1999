@@ -7,6 +7,21 @@ This module contains an entry point that:
 """
 import numpy as np
 from argparse import ArgumentParser
+from sklearn.preprocessing import StandardScaler
+
+def main(infile, outfile):
+    # Load data from CSV file
+    data = pd.read_csv(infile)
+
+    # Create StandardScaler object
+    scaler = StandardScaler()
+
+    # Apply standard scaling to data
+    scaled_data = scaler.fit_transform(data)
+
+    # Write scaled data to CSV file
+    pd.DataFrame(scaled_data).to_csv(outfile, index=False)
+
 
 if __name__ == "__main__":
     # Create your argument parser object here.
@@ -16,4 +31,15 @@ if __name__ == "__main__":
     # Tests will run your command using a system call.
     # To test your program with arguments, run it from the command line
     # (see README.md for more details)
-    pass
+    parser = argparse.ArgumentParser(
+        description='This program applies a standard scale transform to the data in infile and writes it to outfile.')
+
+    # Add positional arguments for input and output filenames
+    parser.add_argument('infile', type=str, help='Input filename for the data file that needs to be processed.')
+    parser.add_argument('outfile', type=str, help='Output filename.')
+
+    # Parse command-line arguments
+    args = parser.parse_args()
+
+    # Call main function with input and output filenames
+    main(args.infile, args.outfile)
