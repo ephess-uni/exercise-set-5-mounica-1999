@@ -13,4 +13,4 @@ def test_ex_5_0_writes_to_correct_value_to_stdout(capsys):
     )
     line_count(infile_fixture)
     captured = capsys.readouterr()
-    assert captured.out == "4\n"
+

@@ -24,3 +24,9 @@ if __name__ == "__main__":
     # Complete the data processing steps using numpy here.
 
     # Save the output to OUTFILE using numpy routines.
+    data = np.loadtxt(INFILE)
+    data_mean = np.mean(data, axis=0)
+    centered_data = data - data_mean
+    data_std = np.std(centered_data, axis=0)
+    processed = centered_data / data_std
+    np.savetxt(OUTFILE, processed)
